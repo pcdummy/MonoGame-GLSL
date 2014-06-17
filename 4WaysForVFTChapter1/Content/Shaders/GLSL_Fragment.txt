@@ -1,0 +1,63 @@
+﻿//
+// Structure definitions
+//
+
+struct VS_OUTPUT {
+    vec4 position;
+    vec4 uv;
+    vec4 worldPos;
+    vec4 textureWeights;
+};
+
+struct VS_INPUT {
+    vec4 position;
+    vec4 uv;
+};
+
+
+//
+// Global variable definitions
+//
+
+uniform sampler2D grassSampler;
+uniform sampler2D rockSampler;
+uniform sampler2D sandSampler;
+uniform sampler2D snowSampler;
+
+//
+// Function declarations
+//
+
+vec4 PixelShaderFunction( in vec4 uv, in vec4 weights );
+
+//
+// Function definitions
+//
+
+vec4 PixelShaderFunction( in vec4 uv, in vec4 weights ) {
+    vec4 sand;
+    vec4 grass;
+    vec4 rock;
+    vec4 snow;
+
+    sand = texture2D( sandSampler, vec2( (uv * 8.00000)));
+    grass = texture2D( grassSampler, vec2( (uv * 8.00000)));
+    rock = texture2D( rockSampler, vec2( (uv * 8.00000)));
+    snow = texture2D( snowSampler, vec2( (uv * 8.00000)));
+    return ((((sand * weights.x ) + (grass * weights.y )) + (rock * weights.z )) + (snow * weights.w ));
+}
+
+
+//
+// Translator's entry point
+//
+void main() {
+    vec4 xlat_retVal;
+
+    xlat_retVal = PixelShaderFunction( vec4(gl_TexCoord[0]), vec4(gl_TexCoord[2]));
+
+    gl_FragData[0] = vec4( xlat_retVal);
+}
+
+
+

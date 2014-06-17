@@ -1,0 +1,61 @@
+#monogame ConstantBuffer(name=ps_uniforms_vec4; sizeInBytes=64; parameters=[0, 1, 2, 3]; offsets=[0, 16, 32, 48])
+
+#monogame BeginShader(stage=pixel; constantBuffers=[0])
+#monogame Sampler(name=ps_s0; type=Sampler2D; textureSlot=0; samplerSlot=0; parameter=4)
+#monogame Sampler(name=ps_s1; type=Sampler2D; textureSlot=1; samplerSlot=1; parameter=5)
+
+#ifdef GL_ES
+precision mediump float;
+precision mediump int;
+#endif
+
+uniform vec4 ps_uniforms_vec4[4];
+const vec4 ps_c4 = vec4(0.3, 0.59, 0.11, 0.0);
+vec4 ps_r0;
+vec4 ps_r1;
+vec4 ps_r2;
+vec4 ps_r3;
+#define ps_c0 ps_uniforms_vec4[0]
+#define ps_c1 ps_uniforms_vec4[1]
+#define ps_c2 ps_uniforms_vec4[2]
+#define ps_c3 ps_uniforms_vec4[3]
+uniform sampler2D ps_s0;
+uniform sampler2D ps_s1;
+varying vec4 vTexCoord0;
+#define ps_v0 vTexCoord0
+#define ps_oC0 gl_FragColor
+
+void main()
+{
+	ps_r0 = texture2D(ps_s0, ps_v0.xy);
+	ps_r1 = texture2D(ps_s1, ps_v0.xy);
+	ps_r0 = ps_r0;
+	ps_r2.x = ps_c2.x;
+	ps_r2.y = dot(ps_r0.xyz, ps_c4.xyz);
+	ps_r3 = -ps_r2.yyyy;
+	ps_r0 = ps_r0 + ps_r3;
+	ps_r0 = ps_r0 * ps_r2.xxxx;
+	ps_r0 = ps_r0 + ps_r2.yyyy;
+	ps_r0 = ps_r0 * ps_c0.xxxx;
+	ps_r1 = ps_r1;
+	ps_r2.x = ps_c3.x;
+	ps_r2.y = dot(ps_r1.xyz, ps_c4.xyz);
+	ps_r3 = -ps_r2.yyyy;
+	ps_r1 = ps_r1 + ps_r3;
+	ps_r1 = ps_r1 * ps_r2.xxxx;
+	ps_r1 = ps_r1 + ps_r2.yyyy;
+	ps_r1 = ps_r1 * ps_c1.xxxx;
+	ps_oC0 = ps_r0 + ps_r1;
+}
+
+
+#monogame EndShader()
+
+#monogame EffectParameter(name=BloomIntensity; class=Scalar; type=Single; semantic=; rows=1; columns=1; elements=[]; structMembers=[])
+#monogame EffectParameter(name=OriginalIntensity; class=Scalar; type=Single; semantic=; rows=1; columns=1; elements=[]; structMembers=[])
+#monogame EffectParameter(name=BloomSaturation; class=Scalar; type=Single; semantic=; rows=1; columns=1; elements=[]; structMembers=[])
+#monogame EffectParameter(name=OriginalSaturation; class=Scalar; type=Single; semantic=; rows=1; columns=1; elements=[]; structMembers=[])
+#monogame EffectParameter(name=BloomSampler; class=Object; type=Texture2D; semantic=; rows=0; columns=0; elements=[]; structMembers=[])
+#monogame EffectParameter(name=ColorMap; class=Object; type=Texture2D; semantic=; rows=0; columns=0; elements=[]; structMembers=[])
+#monogame EffectPass(name=P0; vertexShader=255; pixelShader=0)
+#monogame EffectTechnique(name=BloomCombine)

@@ -1,0 +1,105 @@
+#monogame BeginShader(stage=pixel; constantBuffers=[0])
+#monogame Sampler(name=grassSampler; type=Sampler2D; textureSlot=0; samplerSlot=0; parameter=4)
+#monogame Sampler(name=rockSampler; type=Sampler2D; textureSlot=1; samplerSlot=1; parameter=4)
+#monogame Sampler(name=sandSampler; type=Sampler2D; textureSlot=2; samplerSlot=2; parameter=4)
+#monogame Sampler(name=snowSampler; type=Sampler2D; textureSlot=3; samplerSlot=3; parameter=4)
+#version 130
+
+uniform sampler2D grassSampler;
+uniform sampler2D rockSampler;
+uniform sampler2D sandSampler;
+uniform sampler2D snowSampler;
+void main ()
+{
+  vec4 tmpvar_1;
+  tmpvar_1 = gl_TexCoord[0];
+  vec4 tmpvar_2;
+  tmpvar_2 = gl_TexCoord[2];
+  gl_FragData[0] = vec4(((
+    (texture (sandSampler, (tmpvar_1 * 8.0).xy) * tmpvar_2.x)
+   + 
+    (texture (grassSampler, (tmpvar_1 * 8.0).xy) * tmpvar_2.y)
+  ) + (texture (rockSampler, 
+    (tmpvar_1 * 8.0)
+  .xy) * tmpvar_2.z)) + (texture (snowSampler, (tmpvar_1 * 8.0).xy) * tmpvar_2.w));
+}
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[0])
+#monogame Sampler(name=displacementSampler; type=Sampler2D; textureSlot=0; samplerSlot=0; parameter=4)
+#version 130
+uniform sampler2D displacementSampler;
+uniform vec4 world;
+uniform vec4 view;
+uniform vec4 proj;
+uniform float maxHeight;
+uniform float texelSize;
+uniform float textureSize;
+void main ()
+{
+  vec4 tmpvar_1;
+  tmpvar_1.xzw = gl_Vertex.xzw;
+  vec4 TexWeights_2;
+  vec4 tmpvar_3;
+  tmpvar_3.zw = vec2(0.0, 0.0);
+  tmpvar_3.xy = gl_MultiTexCoord0.xy;
+  vec4 tmpvar_4;
+  tmpvar_4.yzw = vec3(0.0, 0.0, 0.0);
+  tmpvar_4.x = texelSize;
+  vec4 coord_5;
+  coord_5 = (tmpvar_3 + tmpvar_4);
+  vec4 tmpvar_6;
+  tmpvar_6.xzw = vec3(0.0, 0.0, 0.0);
+  tmpvar_6.y = texelSize;
+  vec4 coord_7;
+  coord_7 = (tmpvar_3 + tmpvar_6);
+  vec4 tmpvar_8;
+  tmpvar_8.zw = vec2(0.0, 0.0);
+  tmpvar_8.x = texelSize;
+  tmpvar_8.y = texelSize;
+  vec4 coord_9;
+  coord_9 = (tmpvar_3 + tmpvar_8);
+  vec2 tmpvar_10;
+  tmpvar_10 = fract((gl_MultiTexCoord0.xy * textureSize));
+  vec4 tmpvar_11;
+  tmpvar_11 = mix (mix (texture2DLod (displacementSampler, gl_MultiTexCoord0.xy, 0.0), texture2DLod (displacementSampler, coord_5.xy, coord_5.w), tmpvar_10.xxxx), mix (texture2DLod (displacementSampler, coord_7.xy, coord_7.w), texture2DLod (displacementSampler, coord_9.xy, coord_9.w), tmpvar_10.xxxx), tmpvar_10.yyyy);
+  tmpvar_1.y = (tmpvar_11.x * maxHeight);
+  TexWeights_2.x = clamp ((1.0 - (
+    abs(tmpvar_11.x)
+   / 0.2)), 0.0, 1.0);
+  TexWeights_2.y = clamp ((1.0 - (
+    abs((tmpvar_11.x - 0.3))
+   / 0.25)), 0.0, 1.0);
+  TexWeights_2.z = clamp ((1.0 - (
+    abs((tmpvar_11.x - 0.6))
+   / 0.25)), 0.0, 1.0);
+  TexWeights_2.w = clamp ((1.0 - (
+    abs((tmpvar_11.x - 0.9))
+   / 0.25)), 0.0, 1.0);
+  vec4 tmpvar_12;
+  tmpvar_12 = (TexWeights_2 / ((
+    (TexWeights_2.x + TexWeights_2.y)
+   + TexWeights_2.z) + TexWeights_2.w));
+  TexWeights_2 = tmpvar_12;
+  gl_Position = (tmpvar_1 * (world * (view * proj)));
+  gl_TexCoord[0] = gl_MultiTexCoord0;
+  gl_TexCoord[1] = (tmpvar_1 * world);
+  gl_TexCoord[2] = tmpvar_12;
+}
+#monogame EndShader()
+
+#monogame EffectPass(name=GridTerrain; vertexShader=1; pixelShader=0)
+#monogame EffectTechnique(name=GridTerrain)
+
+#monogame EffectParameter(name=Heightmap; class=Object; type=Texture2D; semantic=; rows=0; columns=0; elements=[]; structMembers=[])
+#monogame EffectParameter(name=World; class=Matrix; type=Single; semantic=; rows=4; columns=4; elements=[]; structMembers=[])
+#monogame EffectParameter(name=View; class=Matrix; type=Single; semantic=; rows=4; columns=4; elements=[]; structMembers=[])
+#monogame EffectParameter(name=Projection; class=Matrix; type=Single; semantic=; rows=4; columns=4; elements=[]; structMembers=[]
+#monogame EffectParameter(name=MaxHeight; class=Scalar; type=Single; semantic=; rows=1; columns=1; elements=[]; structMembers=[])
+#monogame EffectParameter(name=TexelSize; class=Scalar; type=Single; semantic=; rows=1; columns=1; elements=[]; structMembers=[])
+#monogame EffectParameter(name=TextureSize; class=Scalar; type=Single; semantic=; rows=1; columns=1; elements=[]; structMembers=[])
+
+#monogame EffectParameter(name=GrassSampler; class=Object; type=Texture2D; semantic=; rows=0; columns=0; elements=[]; structMembers=[])
+#monogame EffectParameter(name=RockSampler; class=Object; type=Texture2D; semantic=; rows=0; columns=0; elements=[]; structMembers=[])
+#monogame EffectParameter(name=SandSampler; class=Object; type=Texture2D; semantic=; rows=0; columns=0; elements=[]; structMembers=[])
+#monogame EffectParameter(name=SnowSampler; class=Object; type=Texture2D; semantic=; rows=0; columns=0; elements=[]; structMembers=[])
