@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.TestGame2", "Exampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.TestGame3", "Example.TestGame3\Example.TestGame3.csproj", "{DCEFF43E-73DD-4923-9A61-43DF966AD1C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4WaysForVFTChapter1", "4WaysForVFTChapter1\4WaysForVFTChapter1.csproj", "{1A2AE485-1586-46E5-8629-A6D0B13346E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -25,6 +27,14 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A2AE485-1586-46E5-8629-A6D0B13346E3}.Debug|x64.ActiveCfg = Debug|x86
+		{1A2AE485-1586-46E5-8629-A6D0B13346E3}.Debug|x64.Build.0 = Debug|x86
+		{1A2AE485-1586-46E5-8629-A6D0B13346E3}.Debug|x86.ActiveCfg = Debug|x86
+		{1A2AE485-1586-46E5-8629-A6D0B13346E3}.Debug|x86.Build.0 = Debug|x86
+		{1A2AE485-1586-46E5-8629-A6D0B13346E3}.Release|x64.ActiveCfg = Release|x64
+		{1A2AE485-1586-46E5-8629-A6D0B13346E3}.Release|x64.Build.0 = Release|x64
+		{1A2AE485-1586-46E5-8629-A6D0B13346E3}.Release|x86.ActiveCfg = Release|x86
+		{1A2AE485-1586-46E5-8629-A6D0B13346E3}.Release|x86.Build.0 = Release|x86
 		{35253CE1-C864-4CD3-8249-4D1319748E8F}.Debug|x64.ActiveCfg = Debug|x86
 		{35253CE1-C864-4CD3-8249-4D1319748E8F}.Debug|x64.Build.0 = Debug|x86
 		{35253CE1-C864-4CD3-8249-4D1319748E8F}.Debug|x86.ActiveCfg = Debug|x86

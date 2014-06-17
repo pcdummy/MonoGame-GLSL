@@ -8,6 +8,8 @@
     <RootNamespace>FourWaysForVFTChapter1</RootNamespace>
     <AssemblyName>4WaysForVFTChapter1</AssemblyName>
     <ApplicationIcon>Game.ico</ApplicationIcon>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
