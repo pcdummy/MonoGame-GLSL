@@ -1,0 +1,1 @@
+﻿http://stackoverflow.com/questions/3707244/xna-4-0-3d-vertex-example

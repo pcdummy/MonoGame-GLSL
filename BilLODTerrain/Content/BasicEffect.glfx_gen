@@ -1,0 +1,1838 @@
+#monogame ConstantBuffer(name=ps_uniforms_vec4; sizeInBytes=16; parameters=[0]; offsets=[0])
+#monogame ConstantBuffer(name=vs_uniforms_vec4; sizeInBytes=96; parameters=[1, 2, 3]; offsets=[0, 16, 32])
+#monogame ConstantBuffer(name=vs_uniforms_vec4; sizeInBytes=80; parameters=[1, 3]; offsets=[0, 16])
+#monogame ConstantBuffer(name=vs_uniforms_vec4; sizeInBytes=400; parameters=[1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 2, 3, 17, 18]; offsets=[0, 16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224, 240, 304, 352])
+#monogame ConstantBuffer(name=vs_uniforms_vec4; sizeInBytes=304; parameters=[1, 4, 5, 6, 7, 8, 9, 16, 2, 3, 17, 18]; offsets=[0, 16, 32, 48, 64, 80, 96, 112, 128, 144, 208, 256])
+#monogame ConstantBuffer(name=ps_uniforms_vec4; sizeInBytes=240; parameters=[0, 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]; offsets=[0, 16, 32, 48, 64, 80, 96, 112, 128, 144, 160, 176, 192, 208, 224])
+#monogame ConstantBuffer(name=vs_uniforms_vec4; sizeInBytes=192; parameters=[1, 2, 3, 17, 18]; offsets=[0, 16, 32, 96, 144])
+
+#monogame BeginShader(stage=pixel; constantBuffers=[0])
+
+#ifdef GL_ES
+precision mediump float;
+precision mediump int;
+#endif
+
+uniform vec4 ps_uniforms_vec4[1];
+vec4 ps_r0;
+vec4 ps_r1;
+#define ps_c0 ps_uniforms_vec4[0]
+varying vec4 vFrontColor;
+#define ps_v0 vFrontColor
+#define ps_oC0 gl_FragColor
+varying vec4 vFrontSecondaryColor;
+#define ps_v1 vFrontSecondaryColor
+
+void main()
+{
+	ps_r0.xyz = (ps_c0.xyz * ps_v0.www) + -ps_v0.xyz;
+	ps_r1.xyz = ps_v0.xyz;
+	ps_r0.xyz = (ps_v1.www * ps_r0.xyz) + ps_r1.xyz;
+	ps_r0.w = ps_v0.w;
+	ps_oC0 = ps_r0;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[1])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[6];
+const vec4 vs_c1 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c14 vs_uniforms_vec4[1]
+#define vs_c15 vs_uniforms_vec4[2]
+#define vs_c16 vs_uniforms_vec4[3]
+#define vs_c17 vs_uniforms_vec4[4]
+#define vs_c18 vs_uniforms_vec4[5]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+varying vec4 vFrontSecondaryColor;
+#define vs_oD1 vFrontSecondaryColor
+
+void main()
+{
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c1.x);
+	vs_oD1.w = min(vs_r0.x, vs_c1.y);
+	vs_oD0 = vs_c0;
+	vs_oD1.xyz = vs_c1.xxx;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=pixel; constantBuffers=[])
+
+#ifdef GL_ES
+precision mediump float;
+precision mediump int;
+#endif
+
+varying vec4 vFrontColor;
+#define ps_v0 vFrontColor
+#define ps_oC0 gl_FragColor
+
+void main()
+{
+	ps_oC0 = ps_v0;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[2])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[5];
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c15 vs_uniforms_vec4[1]
+#define vs_c16 vs_uniforms_vec4[2]
+#define vs_c17 vs_uniforms_vec4[3]
+#define vs_c18 vs_uniforms_vec4[4]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+
+void main()
+{
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_oD0 = vs_c0;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[1])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=Color; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[6];
+const vec4 vs_c1 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c14 vs_uniforms_vec4[1]
+#define vs_c15 vs_uniforms_vec4[2]
+#define vs_c16 vs_uniforms_vec4[3]
+#define vs_c17 vs_uniforms_vec4[4]
+#define vs_c18 vs_uniforms_vec4[5]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+attribute vec4 vs_v1;
+varying vec4 vFrontSecondaryColor;
+#define vs_oD1 vFrontSecondaryColor
+
+void main()
+{
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c1.x);
+	vs_oD1.w = min(vs_r0.x, vs_c1.y);
+	vs_oD0 = vs_v1 * vs_c0;
+	vs_oD1.xyz = vs_c1.xxx;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[2])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=Color; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[5];
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c15 vs_uniforms_vec4[1]
+#define vs_c16 vs_uniforms_vec4[2]
+#define vs_c17 vs_uniforms_vec4[3]
+#define vs_c18 vs_uniforms_vec4[4]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+attribute vec4 vs_v1;
+
+void main()
+{
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_oD0 = vs_v1 * vs_c0;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=pixel; constantBuffers=[0])
+#monogame Sampler(name=ps_s0; type=Sampler2D; textureSlot=0; samplerSlot=0; parameter=19)
+
+#ifdef GL_ES
+precision mediump float;
+precision mediump int;
+#endif
+
+uniform vec4 ps_uniforms_vec4[1];
+vec4 ps_r0;
+vec4 ps_r1;
+#define ps_c0 ps_uniforms_vec4[0]
+uniform sampler2D ps_s0;
+varying vec4 vFrontColor;
+#define ps_v0 vFrontColor
+varying vec4 vTexCoord0;
+#define ps_t0 vTexCoord0
+#define ps_oC0 gl_FragColor
+varying vec4 vFrontSecondaryColor;
+#define ps_v1 vFrontSecondaryColor
+
+void main()
+{
+	ps_r0 = texture2D(ps_s0, ps_t0.xy);
+	ps_r0 = ps_r0 * ps_v0;
+	ps_r1.xyz = (ps_c0.xyz * ps_r0.www) + -ps_r0.xyz;
+	ps_r0.xyz = (ps_v1.www * ps_r1.xyz) + ps_r0.xyz;
+	ps_oC0 = ps_r0;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[1])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=TextureCoordinate; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[6];
+const vec4 vs_c1 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c14 vs_uniforms_vec4[1]
+#define vs_c15 vs_uniforms_vec4[2]
+#define vs_c16 vs_uniforms_vec4[3]
+#define vs_c17 vs_uniforms_vec4[4]
+#define vs_c18 vs_uniforms_vec4[5]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+varying vec4 vTexCoord0;
+#define vs_oT0 vTexCoord0
+attribute vec4 vs_v1;
+varying vec4 vFrontSecondaryColor;
+#define vs_oD1 vFrontSecondaryColor
+
+void main()
+{
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c1.x);
+	vs_oD1.w = min(vs_r0.x, vs_c1.y);
+	vs_oD0 = vs_c0;
+	vs_oD1.xyz = vs_c1.xxx;
+	vs_oT0.xy = vs_v1.xy;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=pixel; constantBuffers=[])
+#monogame Sampler(name=ps_s0; type=Sampler2D; textureSlot=0; samplerSlot=0; parameter=19)
+
+#ifdef GL_ES
+precision mediump float;
+precision mediump int;
+#endif
+
+vec4 ps_r0;
+uniform sampler2D ps_s0;
+varying vec4 vFrontColor;
+#define ps_v0 vFrontColor
+varying vec4 vTexCoord0;
+#define ps_t0 vTexCoord0
+#define ps_oC0 gl_FragColor
+
+void main()
+{
+	ps_r0 = texture2D(ps_s0, ps_t0.xy);
+	ps_r0 = ps_r0 * ps_v0;
+	ps_oC0 = ps_r0;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[2])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=TextureCoordinate; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[5];
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c15 vs_uniforms_vec4[1]
+#define vs_c16 vs_uniforms_vec4[2]
+#define vs_c17 vs_uniforms_vec4[3]
+#define vs_c18 vs_uniforms_vec4[4]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+varying vec4 vTexCoord0;
+#define vs_oT0 vTexCoord0
+attribute vec4 vs_v1;
+
+void main()
+{
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_oD0 = vs_c0;
+	vs_oT0.xy = vs_v1.xy;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[1])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=TextureCoordinate; index=0)
+#monogame Attribute(name=vs_v2; usage=Color; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[6];
+const vec4 vs_c1 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c14 vs_uniforms_vec4[1]
+#define vs_c15 vs_uniforms_vec4[2]
+#define vs_c16 vs_uniforms_vec4[3]
+#define vs_c17 vs_uniforms_vec4[4]
+#define vs_c18 vs_uniforms_vec4[5]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+varying vec4 vTexCoord0;
+#define vs_oT0 vTexCoord0
+attribute vec4 vs_v1;
+varying vec4 vFrontSecondaryColor;
+#define vs_oD1 vFrontSecondaryColor
+attribute vec4 vs_v2;
+
+void main()
+{
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c1.x);
+	vs_oD1.w = min(vs_r0.x, vs_c1.y);
+	vs_oD0 = vs_v2 * vs_c0;
+	vs_oD1.xyz = vs_c1.xxx;
+	vs_oT0.xy = vs_v1.xy;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[2])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=TextureCoordinate; index=0)
+#monogame Attribute(name=vs_v2; usage=Color; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[5];
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c15 vs_uniforms_vec4[1]
+#define vs_c16 vs_uniforms_vec4[2]
+#define vs_c17 vs_uniforms_vec4[3]
+#define vs_c18 vs_uniforms_vec4[4]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+varying vec4 vTexCoord0;
+#define vs_oT0 vTexCoord0
+attribute vec4 vs_v1;
+attribute vec4 vs_v2;
+
+void main()
+{
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_oD0 = vs_v2 * vs_c0;
+	vs_oT0.xy = vs_v1.xy;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=pixel; constantBuffers=[0])
+
+#ifdef GL_ES
+precision mediump float;
+precision mediump int;
+#endif
+
+uniform vec4 ps_uniforms_vec4[1];
+vec4 ps_r0;
+vec4 ps_r1;
+#define ps_c0 ps_uniforms_vec4[0]
+varying vec4 vFrontColor;
+#define ps_v0 vFrontColor
+#define ps_oC0 gl_FragColor
+varying vec4 vFrontSecondaryColor;
+#define ps_v1 vFrontSecondaryColor
+
+void main()
+{
+	ps_r0 = ps_v0;
+	ps_r0.xyz = (ps_v1.xyz * ps_r0.www) + ps_r0.xyz;
+	ps_r1.xyz = (ps_c0.xyz * ps_v0.www) + -ps_r0.xyz;
+	ps_r0.xyz = (ps_v1.www * ps_r1.xyz) + ps_r0.xyz;
+	ps_r0.w = ps_v0.w;
+	ps_oC0 = ps_r0;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[3])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=Normal; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[25];
+const vec4 vs_c22 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+vec4 vs_r1;
+vec4 vs_r2;
+vec4 vs_r3;
+vec4 vs_r4;
+vec4 vs_r5;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c1 vs_uniforms_vec4[1]
+#define vs_c2 vs_uniforms_vec4[2]
+#define vs_c3 vs_uniforms_vec4[3]
+#define vs_c4 vs_uniforms_vec4[4]
+#define vs_c5 vs_uniforms_vec4[5]
+#define vs_c6 vs_uniforms_vec4[6]
+#define vs_c7 vs_uniforms_vec4[7]
+#define vs_c8 vs_uniforms_vec4[8]
+#define vs_c9 vs_uniforms_vec4[9]
+#define vs_c10 vs_uniforms_vec4[10]
+#define vs_c11 vs_uniforms_vec4[11]
+#define vs_c12 vs_uniforms_vec4[12]
+#define vs_c13 vs_uniforms_vec4[13]
+#define vs_c14 vs_uniforms_vec4[14]
+#define vs_c15 vs_uniforms_vec4[15]
+#define vs_c16 vs_uniforms_vec4[16]
+#define vs_c17 vs_uniforms_vec4[17]
+#define vs_c18 vs_uniforms_vec4[18]
+#define vs_c19 vs_uniforms_vec4[19]
+#define vs_c20 vs_uniforms_vec4[20]
+#define vs_c21 vs_uniforms_vec4[21]
+#define vs_c23 vs_uniforms_vec4[22]
+#define vs_c24 vs_uniforms_vec4[23]
+#define vs_c25 vs_uniforms_vec4[24]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+attribute vec4 vs_v1;
+varying vec4 vFrontSecondaryColor;
+#define vs_oD1 vFrontSecondaryColor
+
+void main()
+{
+	vs_r0.x = dot(vs_v1.xyz, vs_c23.xyz);
+	vs_r0.y = dot(vs_v1.xyz, vs_c24.xyz);
+	vs_r0.z = dot(vs_v1.xyz, vs_c25.xyz);
+	vs_r1.xyz = normalize(vs_r0.xyz);
+	vs_r0.x = dot(-vs_c4.xyz, vs_r1.xyz);
+	vs_r0.y = dot(-vs_c7.xyz, vs_r1.xyz);
+	vs_r0.z = dot(-vs_c10.xyz, vs_r1.xyz);
+	vs_r2.xyz = vec3(greaterThanEqual(vs_r0.xyz, vs_c22.xxx));
+	vs_r0.xyz = vs_r0.xyz * vs_r2.xyz;
+	vs_r3.xyz = vs_r0.yyy * vs_c8.xyz;
+	vs_r0.xyw = (vs_r0.xxx * vs_c5.xyz) + vs_r3.xyz;
+	vs_r0.xyz = (vs_r0.zzz * vs_c11.xyz) + vs_r0.xyw;
+	vs_r3.xyz = vs_c0.xyz;
+	vs_oD0.xyz = (vs_r0.xyz * vs_r3.xyz) + vs_c1.xyz;
+	vs_r0.x = dot(vs_v0, vs_c19);
+	vs_r0.y = dot(vs_v0, vs_c20);
+	vs_r0.z = dot(vs_v0, vs_c21);
+	vs_r0.xyz = -vs_r0.xyz + vs_c13.xyz;
+	vs_r3.xyz = normalize(vs_r0.xyz);
+	vs_r0.xyz = vs_r3.xyz + -vs_c4.xyz;
+	vs_r4.xyz = normalize(vs_r0.xyz);
+	vs_r0.x = dot(vs_r4.xyz, vs_r1.xyz);
+	vs_r4.xyz = vs_r3.xyz + -vs_c7.xyz;
+	vs_r3.xyz = vs_r3.xyz + -vs_c10.xyz;
+	vs_r5.xyz = normalize(vs_r3.xyz);
+	vs_r0.z = dot(vs_r5.xyz, vs_r1.xyz);
+	vs_r3.xyz = normalize(vs_r4.xyz);
+	vs_r0.y = dot(vs_r3.xyz, vs_r1.xyz);
+	vs_r0.xyz = max(vs_r0.xyz, vs_c22.xxx);
+	vs_r0.xyz = vs_r2.xyz * vs_r0.xyz;
+	vs_r1.x = log2(vs_r0.x);
+	vs_r1.y = log2(vs_r0.y);
+	vs_r1.z = log2(vs_r0.z);
+	vs_r0.xyz = vs_r1.xyz * vs_c3.xxx;
+	vs_r0.x = exp2(vs_r0.x);
+	vs_r0.y = exp2(vs_r0.y);
+	vs_r0.z = exp2(vs_r0.z);
+	vs_r1.xyz = vs_r0.yyy * vs_c9.xyz;
+	vs_r0.xyw = (vs_r0.xxx * vs_c6.xyz) + vs_r1.xyz;
+	vs_r0.xyz = (vs_r0.zzz * vs_c12.xyz) + vs_r0.xyw;
+	vs_oD1.xyz = vs_r0.xyz * vs_c2.xyz;
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c22.x);
+	vs_oD1.w = min(vs_r0.x, vs_c22.y);
+	vs_oD0.w = vs_c0.w;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=pixel; constantBuffers=[])
+
+#ifdef GL_ES
+precision mediump float;
+precision mediump int;
+#endif
+
+vec4 ps_r0;
+varying vec4 vFrontColor;
+#define ps_v0 vFrontColor
+#define ps_oC0 gl_FragColor
+varying vec4 vFrontSecondaryColor;
+#define ps_v1 vFrontSecondaryColor
+
+void main()
+{
+	ps_r0 = ps_v0;
+	ps_r0.xyz = (ps_v1.xyz * ps_r0.www) + ps_r0.xyz;
+	ps_r0.w = ps_v0.w;
+	ps_oC0 = ps_r0;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[3])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=Normal; index=0)
+#monogame Attribute(name=vs_v2; usage=Color; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[25];
+const vec4 vs_c22 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+vec4 vs_r1;
+vec4 vs_r2;
+vec4 vs_r3;
+vec4 vs_r4;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c1 vs_uniforms_vec4[1]
+#define vs_c2 vs_uniforms_vec4[2]
+#define vs_c3 vs_uniforms_vec4[3]
+#define vs_c4 vs_uniforms_vec4[4]
+#define vs_c5 vs_uniforms_vec4[5]
+#define vs_c6 vs_uniforms_vec4[6]
+#define vs_c7 vs_uniforms_vec4[7]
+#define vs_c8 vs_uniforms_vec4[8]
+#define vs_c9 vs_uniforms_vec4[9]
+#define vs_c10 vs_uniforms_vec4[10]
+#define vs_c11 vs_uniforms_vec4[11]
+#define vs_c12 vs_uniforms_vec4[12]
+#define vs_c13 vs_uniforms_vec4[13]
+#define vs_c14 vs_uniforms_vec4[14]
+#define vs_c15 vs_uniforms_vec4[15]
+#define vs_c16 vs_uniforms_vec4[16]
+#define vs_c17 vs_uniforms_vec4[17]
+#define vs_c18 vs_uniforms_vec4[18]
+#define vs_c19 vs_uniforms_vec4[19]
+#define vs_c20 vs_uniforms_vec4[20]
+#define vs_c21 vs_uniforms_vec4[21]
+#define vs_c23 vs_uniforms_vec4[22]
+#define vs_c24 vs_uniforms_vec4[23]
+#define vs_c25 vs_uniforms_vec4[24]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+attribute vec4 vs_v1;
+varying vec4 vFrontSecondaryColor;
+#define vs_oD1 vFrontSecondaryColor
+attribute vec4 vs_v2;
+
+void main()
+{
+	vs_r0.x = dot(vs_v0, vs_c19);
+	vs_r0.y = dot(vs_v0, vs_c20);
+	vs_r0.z = dot(vs_v0, vs_c21);
+	vs_r0.xyz = -vs_r0.xyz + vs_c13.xyz;
+	vs_r1.xyz = normalize(vs_r0.xyz);
+	vs_r0.xyz = vs_r1.xyz + -vs_c4.xyz;
+	vs_r2.xyz = normalize(vs_r0.xyz);
+	vs_r0.x = dot(vs_v1.xyz, vs_c23.xyz);
+	vs_r0.y = dot(vs_v1.xyz, vs_c24.xyz);
+	vs_r0.z = dot(vs_v1.xyz, vs_c25.xyz);
+	vs_r3.xyz = normalize(vs_r0.xyz);
+	vs_r0.x = dot(vs_r2.xyz, vs_r3.xyz);
+	vs_r2.xyz = vs_r1.xyz + -vs_c7.xyz;
+	vs_r1.xyz = vs_r1.xyz + -vs_c10.xyz;
+	vs_r4.xyz = normalize(vs_r1.xyz);
+	vs_r0.z = dot(vs_r4.xyz, vs_r3.xyz);
+	vs_r1.xyz = normalize(vs_r2.xyz);
+	vs_r0.y = dot(vs_r1.xyz, vs_r3.xyz);
+	vs_r0.xyz = max(vs_r0.xyz, vs_c22.xxx);
+	vs_r1.x = dot(-vs_c4.xyz, vs_r3.xyz);
+	vs_r1.y = dot(-vs_c7.xyz, vs_r3.xyz);
+	vs_r1.z = dot(-vs_c10.xyz, vs_r3.xyz);
+	vs_r2.xyz = vec3(greaterThanEqual(vs_r1.xyz, vs_c22.xxx));
+	vs_r1.xyz = vs_r1.xyz * vs_r2.xyz;
+	vs_r0.xyz = vs_r0.xyz * vs_r2.xyz;
+	vs_r2.x = log2(vs_r0.x);
+	vs_r2.y = log2(vs_r0.y);
+	vs_r2.z = log2(vs_r0.z);
+	vs_r0.xyz = vs_r2.xyz * vs_c3.xxx;
+	vs_r0.y = exp2(vs_r0.y);
+	vs_r2.xyz = vs_r0.yyy * vs_c9.xyz;
+	vs_r0.x = exp2(vs_r0.x);
+	vs_r0.y = exp2(vs_r0.z);
+	vs_r0.xzw = (vs_r0.xxx * vs_c6.xyz) + vs_r2.xyz;
+	vs_r0.xyz = (vs_r0.yyy * vs_c12.xyz) + vs_r0.xzw;
+	vs_oD1.xyz = vs_r0.xyz * vs_c2.xyz;
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c22.x);
+	vs_oD1.w = min(vs_r0.x, vs_c22.y);
+	vs_r0.xyz = vs_r1.yyy * vs_c8.xyz;
+	vs_r0.xyz = (vs_r1.xxx * vs_c5.xyz) + vs_r0.xyz;
+	vs_r0.xyz = (vs_r1.zzz * vs_c11.xyz) + vs_r0.xyz;
+	vs_r1.xyz = vs_c0.xyz;
+	vs_r0.xyz = (vs_r0.xyz * vs_r1.xyz) + vs_c1.xyz;
+	vs_oD0.xyz = vs_r0.xyz * vs_v2.xyz;
+	vs_oD0.w = vs_v2.w * vs_c0.w;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=pixel; constantBuffers=[0])
+#monogame Sampler(name=ps_s0; type=Sampler2D; textureSlot=0; samplerSlot=0; parameter=19)
+
+#ifdef GL_ES
+precision mediump float;
+precision mediump int;
+#endif
+
+uniform vec4 ps_uniforms_vec4[1];
+vec4 ps_r0;
+vec4 ps_r1;
+vec4 ps_r2;
+#define ps_c0 ps_uniforms_vec4[0]
+uniform sampler2D ps_s0;
+varying vec4 vFrontColor;
+#define ps_v0 vFrontColor
+varying vec4 vTexCoord0;
+#define ps_t0 vTexCoord0
+#define ps_oC0 gl_FragColor
+varying vec4 vFrontSecondaryColor;
+#define ps_v1 vFrontSecondaryColor
+
+void main()
+{
+	ps_r0 = texture2D(ps_s0, ps_t0.xy);
+	ps_r0 = ps_r0 * ps_v0;
+	ps_r1.xyz = (ps_v1.xyz * ps_r0.www) + ps_r0.xyz;
+	ps_r2.xyz = (ps_c0.xyz * ps_r0.www) + -ps_r1.xyz;
+	ps_r0.xyz = (ps_v1.www * ps_r2.xyz) + ps_r1.xyz;
+	ps_oC0 = ps_r0;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[3])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=Normal; index=0)
+#monogame Attribute(name=vs_v2; usage=TextureCoordinate; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[25];
+const vec4 vs_c22 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+vec4 vs_r1;
+vec4 vs_r2;
+vec4 vs_r3;
+vec4 vs_r4;
+vec4 vs_r5;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c1 vs_uniforms_vec4[1]
+#define vs_c2 vs_uniforms_vec4[2]
+#define vs_c3 vs_uniforms_vec4[3]
+#define vs_c4 vs_uniforms_vec4[4]
+#define vs_c5 vs_uniforms_vec4[5]
+#define vs_c6 vs_uniforms_vec4[6]
+#define vs_c7 vs_uniforms_vec4[7]
+#define vs_c8 vs_uniforms_vec4[8]
+#define vs_c9 vs_uniforms_vec4[9]
+#define vs_c10 vs_uniforms_vec4[10]
+#define vs_c11 vs_uniforms_vec4[11]
+#define vs_c12 vs_uniforms_vec4[12]
+#define vs_c13 vs_uniforms_vec4[13]
+#define vs_c14 vs_uniforms_vec4[14]
+#define vs_c15 vs_uniforms_vec4[15]
+#define vs_c16 vs_uniforms_vec4[16]
+#define vs_c17 vs_uniforms_vec4[17]
+#define vs_c18 vs_uniforms_vec4[18]
+#define vs_c19 vs_uniforms_vec4[19]
+#define vs_c20 vs_uniforms_vec4[20]
+#define vs_c21 vs_uniforms_vec4[21]
+#define vs_c23 vs_uniforms_vec4[22]
+#define vs_c24 vs_uniforms_vec4[23]
+#define vs_c25 vs_uniforms_vec4[24]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+varying vec4 vTexCoord0;
+#define vs_oT0 vTexCoord0
+attribute vec4 vs_v1;
+varying vec4 vFrontSecondaryColor;
+#define vs_oD1 vFrontSecondaryColor
+attribute vec4 vs_v2;
+
+void main()
+{
+	vs_r0.x = dot(vs_v1.xyz, vs_c23.xyz);
+	vs_r0.y = dot(vs_v1.xyz, vs_c24.xyz);
+	vs_r0.z = dot(vs_v1.xyz, vs_c25.xyz);
+	vs_r1.xyz = normalize(vs_r0.xyz);
+	vs_r0.x = dot(-vs_c4.xyz, vs_r1.xyz);
+	vs_r0.y = dot(-vs_c7.xyz, vs_r1.xyz);
+	vs_r0.z = dot(-vs_c10.xyz, vs_r1.xyz);
+	vs_r2.xyz = vec3(greaterThanEqual(vs_r0.xyz, vs_c22.xxx));
+	vs_r0.xyz = vs_r0.xyz * vs_r2.xyz;
+	vs_r3.xyz = vs_r0.yyy * vs_c8.xyz;
+	vs_r0.xyw = (vs_r0.xxx * vs_c5.xyz) + vs_r3.xyz;
+	vs_r0.xyz = (vs_r0.zzz * vs_c11.xyz) + vs_r0.xyw;
+	vs_r3.xyz = vs_c0.xyz;
+	vs_oD0.xyz = (vs_r0.xyz * vs_r3.xyz) + vs_c1.xyz;
+	vs_r0.x = dot(vs_v0, vs_c19);
+	vs_r0.y = dot(vs_v0, vs_c20);
+	vs_r0.z = dot(vs_v0, vs_c21);
+	vs_r0.xyz = -vs_r0.xyz + vs_c13.xyz;
+	vs_r3.xyz = normalize(vs_r0.xyz);
+	vs_r0.xyz = vs_r3.xyz + -vs_c4.xyz;
+	vs_r4.xyz = normalize(vs_r0.xyz);
+	vs_r0.x = dot(vs_r4.xyz, vs_r1.xyz);
+	vs_r4.xyz = vs_r3.xyz + -vs_c7.xyz;
+	vs_r3.xyz = vs_r3.xyz + -vs_c10.xyz;
+	vs_r5.xyz = normalize(vs_r3.xyz);
+	vs_r0.z = dot(vs_r5.xyz, vs_r1.xyz);
+	vs_r3.xyz = normalize(vs_r4.xyz);
+	vs_r0.y = dot(vs_r3.xyz, vs_r1.xyz);
+	vs_r0.xyz = max(vs_r0.xyz, vs_c22.xxx);
+	vs_r0.xyz = vs_r2.xyz * vs_r0.xyz;
+	vs_r1.x = log2(vs_r0.x);
+	vs_r1.y = log2(vs_r0.y);
+	vs_r1.z = log2(vs_r0.z);
+	vs_r0.xyz = vs_r1.xyz * vs_c3.xxx;
+	vs_r0.x = exp2(vs_r0.x);
+	vs_r0.y = exp2(vs_r0.y);
+	vs_r0.z = exp2(vs_r0.z);
+	vs_r1.xyz = vs_r0.yyy * vs_c9.xyz;
+	vs_r0.xyw = (vs_r0.xxx * vs_c6.xyz) + vs_r1.xyz;
+	vs_r0.xyz = (vs_r0.zzz * vs_c12.xyz) + vs_r0.xyw;
+	vs_oD1.xyz = vs_r0.xyz * vs_c2.xyz;
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c22.x);
+	vs_oD1.w = min(vs_r0.x, vs_c22.y);
+	vs_oD0.w = vs_c0.w;
+	vs_oT0.xy = vs_v2.xy;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=pixel; constantBuffers=[])
+#monogame Sampler(name=ps_s0; type=Sampler2D; textureSlot=0; samplerSlot=0; parameter=19)
+
+#ifdef GL_ES
+precision mediump float;
+precision mediump int;
+#endif
+
+vec4 ps_r0;
+uniform sampler2D ps_s0;
+varying vec4 vFrontColor;
+#define ps_v0 vFrontColor
+varying vec4 vTexCoord0;
+#define ps_t0 vTexCoord0
+#define ps_oC0 gl_FragColor
+varying vec4 vFrontSecondaryColor;
+#define ps_v1 vFrontSecondaryColor
+
+void main()
+{
+	ps_r0 = texture2D(ps_s0, ps_t0.xy);
+	ps_r0 = ps_r0 * ps_v0;
+	ps_r0.xyz = (ps_v1.xyz * ps_r0.www) + ps_r0.xyz;
+	ps_oC0 = ps_r0;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[3])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=Normal; index=0)
+#monogame Attribute(name=vs_v2; usage=TextureCoordinate; index=0)
+#monogame Attribute(name=vs_v3; usage=Color; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[25];
+const vec4 vs_c22 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+vec4 vs_r1;
+vec4 vs_r2;
+vec4 vs_r3;
+vec4 vs_r4;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c1 vs_uniforms_vec4[1]
+#define vs_c2 vs_uniforms_vec4[2]
+#define vs_c3 vs_uniforms_vec4[3]
+#define vs_c4 vs_uniforms_vec4[4]
+#define vs_c5 vs_uniforms_vec4[5]
+#define vs_c6 vs_uniforms_vec4[6]
+#define vs_c7 vs_uniforms_vec4[7]
+#define vs_c8 vs_uniforms_vec4[8]
+#define vs_c9 vs_uniforms_vec4[9]
+#define vs_c10 vs_uniforms_vec4[10]
+#define vs_c11 vs_uniforms_vec4[11]
+#define vs_c12 vs_uniforms_vec4[12]
+#define vs_c13 vs_uniforms_vec4[13]
+#define vs_c14 vs_uniforms_vec4[14]
+#define vs_c15 vs_uniforms_vec4[15]
+#define vs_c16 vs_uniforms_vec4[16]
+#define vs_c17 vs_uniforms_vec4[17]
+#define vs_c18 vs_uniforms_vec4[18]
+#define vs_c19 vs_uniforms_vec4[19]
+#define vs_c20 vs_uniforms_vec4[20]
+#define vs_c21 vs_uniforms_vec4[21]
+#define vs_c23 vs_uniforms_vec4[22]
+#define vs_c24 vs_uniforms_vec4[23]
+#define vs_c25 vs_uniforms_vec4[24]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+varying vec4 vTexCoord0;
+#define vs_oT0 vTexCoord0
+attribute vec4 vs_v1;
+varying vec4 vFrontSecondaryColor;
+#define vs_oD1 vFrontSecondaryColor
+attribute vec4 vs_v2;
+attribute vec4 vs_v3;
+
+void main()
+{
+	vs_r0.x = dot(vs_v0, vs_c19);
+	vs_r0.y = dot(vs_v0, vs_c20);
+	vs_r0.z = dot(vs_v0, vs_c21);
+	vs_r0.xyz = -vs_r0.xyz + vs_c13.xyz;
+	vs_r1.xyz = normalize(vs_r0.xyz);
+	vs_r0.xyz = vs_r1.xyz + -vs_c4.xyz;
+	vs_r2.xyz = normalize(vs_r0.xyz);
+	vs_r0.x = dot(vs_v1.xyz, vs_c23.xyz);
+	vs_r0.y = dot(vs_v1.xyz, vs_c24.xyz);
+	vs_r0.z = dot(vs_v1.xyz, vs_c25.xyz);
+	vs_r3.xyz = normalize(vs_r0.xyz);
+	vs_r0.x = dot(vs_r2.xyz, vs_r3.xyz);
+	vs_r2.xyz = vs_r1.xyz + -vs_c7.xyz;
+	vs_r1.xyz = vs_r1.xyz + -vs_c10.xyz;
+	vs_r4.xyz = normalize(vs_r1.xyz);
+	vs_r0.z = dot(vs_r4.xyz, vs_r3.xyz);
+	vs_r1.xyz = normalize(vs_r2.xyz);
+	vs_r0.y = dot(vs_r1.xyz, vs_r3.xyz);
+	vs_r0.xyz = max(vs_r0.xyz, vs_c22.xxx);
+	vs_r1.x = dot(-vs_c4.xyz, vs_r3.xyz);
+	vs_r1.y = dot(-vs_c7.xyz, vs_r3.xyz);
+	vs_r1.z = dot(-vs_c10.xyz, vs_r3.xyz);
+	vs_r2.xyz = vec3(greaterThanEqual(vs_r1.xyz, vs_c22.xxx));
+	vs_r1.xyz = vs_r1.xyz * vs_r2.xyz;
+	vs_r0.xyz = vs_r0.xyz * vs_r2.xyz;
+	vs_r2.x = log2(vs_r0.x);
+	vs_r2.y = log2(vs_r0.y);
+	vs_r2.z = log2(vs_r0.z);
+	vs_r0.xyz = vs_r2.xyz * vs_c3.xxx;
+	vs_r0.y = exp2(vs_r0.y);
+	vs_r2.xyz = vs_r0.yyy * vs_c9.xyz;
+	vs_r0.x = exp2(vs_r0.x);
+	vs_r0.y = exp2(vs_r0.z);
+	vs_r0.xzw = (vs_r0.xxx * vs_c6.xyz) + vs_r2.xyz;
+	vs_r0.xyz = (vs_r0.yyy * vs_c12.xyz) + vs_r0.xzw;
+	vs_oD1.xyz = vs_r0.xyz * vs_c2.xyz;
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c22.x);
+	vs_oD1.w = min(vs_r0.x, vs_c22.y);
+	vs_r0.xyz = vs_r1.yyy * vs_c8.xyz;
+	vs_r0.xyz = (vs_r1.xxx * vs_c5.xyz) + vs_r0.xyz;
+	vs_r0.xyz = (vs_r1.zzz * vs_c11.xyz) + vs_r0.xyz;
+	vs_r1.xyz = vs_c0.xyz;
+	vs_r0.xyz = (vs_r0.xyz * vs_r1.xyz) + vs_c1.xyz;
+	vs_oD0.xyz = vs_r0.xyz * vs_v3.xyz;
+	vs_oD0.w = vs_v3.w * vs_c0.w;
+	vs_oT0.xy = vs_v2.xy;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[4])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=Normal; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[19];
+const vec4 vs_c7 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+vec4 vs_r1;
+vec4 vs_r2;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c1 vs_uniforms_vec4[1]
+#define vs_c2 vs_uniforms_vec4[2]
+#define vs_c3 vs_uniforms_vec4[3]
+#define vs_c4 vs_uniforms_vec4[4]
+#define vs_c5 vs_uniforms_vec4[5]
+#define vs_c6 vs_uniforms_vec4[6]
+#define vs_c13 vs_uniforms_vec4[7]
+#define vs_c14 vs_uniforms_vec4[8]
+#define vs_c15 vs_uniforms_vec4[9]
+#define vs_c16 vs_uniforms_vec4[10]
+#define vs_c17 vs_uniforms_vec4[11]
+#define vs_c18 vs_uniforms_vec4[12]
+#define vs_c19 vs_uniforms_vec4[13]
+#define vs_c20 vs_uniforms_vec4[14]
+#define vs_c21 vs_uniforms_vec4[15]
+#define vs_c23 vs_uniforms_vec4[16]
+#define vs_c24 vs_uniforms_vec4[17]
+#define vs_c25 vs_uniforms_vec4[18]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+attribute vec4 vs_v1;
+varying vec4 vFrontSecondaryColor;
+#define vs_oD1 vFrontSecondaryColor
+
+void main()
+{
+	vs_r0.x = dot(vs_v1.xyz, vs_c23.xyz);
+	vs_r0.y = dot(vs_v1.xyz, vs_c24.xyz);
+	vs_r0.z = dot(vs_v1.xyz, vs_c25.xyz);
+	vs_r1.xyz = normalize(vs_r0.xyz);
+	vs_r0.x = dot(-vs_c4.xyz, vs_r1.xyz);
+	vs_r0.y = float(vs_r0.x >= vs_c7.x);
+	vs_r0.x = vs_r0.x * vs_r0.y;
+	vs_r0.xzw = vs_r0.xxx * vs_c5.xyz;
+	vs_r2.xyz = vs_c0.xyz;
+	vs_oD0.xyz = (vs_r0.xzw * vs_r2.xyz) + vs_c1.xyz;
+	vs_r2.x = dot(vs_v0, vs_c19);
+	vs_r2.y = dot(vs_v0, vs_c20);
+	vs_r2.z = dot(vs_v0, vs_c21);
+	vs_r0.xzw = -vs_r2.xyz + vs_c13.xyz;
+	vs_r2.xyz = normalize(vs_r0.xzw);
+	vs_r0.xzw = vs_r2.xyz + -vs_c4.xyz;
+	vs_r2.xyz = normalize(vs_r0.xzw);
+	vs_r0.x = dot(vs_r2.xyz, vs_r1.xyz);
+	vs_r0.x = max(vs_r0.x, vs_c7.x);
+	vs_r0.x = vs_r0.y * vs_r0.x;
+	vs_r1.x = pow(abs(vs_r0.x), vs_c3.x);
+	vs_r0.xyz = vs_r1.xxx * vs_c6.xyz;
+	vs_oD1.xyz = vs_r0.xyz * vs_c2.xyz;
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c7.x);
+	vs_oD1.w = min(vs_r0.x, vs_c7.y);
+	vs_oD0.w = vs_c0.w;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[4])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=Normal; index=0)
+#monogame Attribute(name=vs_v2; usage=Color; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[19];
+const vec4 vs_c7 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+vec4 vs_r1;
+vec4 vs_r2;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c1 vs_uniforms_vec4[1]
+#define vs_c2 vs_uniforms_vec4[2]
+#define vs_c3 vs_uniforms_vec4[3]
+#define vs_c4 vs_uniforms_vec4[4]
+#define vs_c5 vs_uniforms_vec4[5]
+#define vs_c6 vs_uniforms_vec4[6]
+#define vs_c13 vs_uniforms_vec4[7]
+#define vs_c14 vs_uniforms_vec4[8]
+#define vs_c15 vs_uniforms_vec4[9]
+#define vs_c16 vs_uniforms_vec4[10]
+#define vs_c17 vs_uniforms_vec4[11]
+#define vs_c18 vs_uniforms_vec4[12]
+#define vs_c19 vs_uniforms_vec4[13]
+#define vs_c20 vs_uniforms_vec4[14]
+#define vs_c21 vs_uniforms_vec4[15]
+#define vs_c23 vs_uniforms_vec4[16]
+#define vs_c24 vs_uniforms_vec4[17]
+#define vs_c25 vs_uniforms_vec4[18]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+attribute vec4 vs_v1;
+varying vec4 vFrontSecondaryColor;
+#define vs_oD1 vFrontSecondaryColor
+attribute vec4 vs_v2;
+
+void main()
+{
+	vs_r0.x = dot(vs_v0, vs_c19);
+	vs_r0.y = dot(vs_v0, vs_c20);
+	vs_r0.z = dot(vs_v0, vs_c21);
+	vs_r0.xyz = -vs_r0.xyz + vs_c13.xyz;
+	vs_r1.xyz = normalize(vs_r0.xyz);
+	vs_r0.xyz = vs_r1.xyz + -vs_c4.xyz;
+	vs_r1.xyz = normalize(vs_r0.xyz);
+	vs_r0.x = dot(vs_v1.xyz, vs_c23.xyz);
+	vs_r0.y = dot(vs_v1.xyz, vs_c24.xyz);
+	vs_r0.z = dot(vs_v1.xyz, vs_c25.xyz);
+	vs_r2.xyz = normalize(vs_r0.xyz);
+	vs_r0.x = dot(vs_r1.xyz, vs_r2.xyz);
+	vs_r0.y = dot(-vs_c4.xyz, vs_r2.xyz);
+	vs_r0.x = max(vs_r0.x, vs_c7.x);
+	vs_r0.z = float(vs_r0.y >= vs_c7.x);
+	vs_r0.xy = vs_r0.zy * vs_r0.xz;
+	vs_r1.x = pow(abs(vs_r0.x), vs_c3.x);
+	vs_r0.xzw = vs_r1.xxx * vs_c6.xyz;
+	vs_oD1.xyz = vs_r0.xzw * vs_c2.xyz;
+	vs_r0.xyz = vs_r0.yyy * vs_c5.xyz;
+	vs_r1.xyz = vs_c0.xyz;
+	vs_r0.xyz = (vs_r0.xyz * vs_r1.xyz) + vs_c1.xyz;
+	vs_oD0.xyz = vs_r0.xyz * vs_v2.xyz;
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c7.x);
+	vs_oD1.w = min(vs_r0.x, vs_c7.y);
+	vs_oD0.w = vs_v2.w * vs_c0.w;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[4])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=Normal; index=0)
+#monogame Attribute(name=vs_v2; usage=TextureCoordinate; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[19];
+const vec4 vs_c7 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+vec4 vs_r1;
+vec4 vs_r2;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c1 vs_uniforms_vec4[1]
+#define vs_c2 vs_uniforms_vec4[2]
+#define vs_c3 vs_uniforms_vec4[3]
+#define vs_c4 vs_uniforms_vec4[4]
+#define vs_c5 vs_uniforms_vec4[5]
+#define vs_c6 vs_uniforms_vec4[6]
+#define vs_c13 vs_uniforms_vec4[7]
+#define vs_c14 vs_uniforms_vec4[8]
+#define vs_c15 vs_uniforms_vec4[9]
+#define vs_c16 vs_uniforms_vec4[10]
+#define vs_c17 vs_uniforms_vec4[11]
+#define vs_c18 vs_uniforms_vec4[12]
+#define vs_c19 vs_uniforms_vec4[13]
+#define vs_c20 vs_uniforms_vec4[14]
+#define vs_c21 vs_uniforms_vec4[15]
+#define vs_c23 vs_uniforms_vec4[16]
+#define vs_c24 vs_uniforms_vec4[17]
+#define vs_c25 vs_uniforms_vec4[18]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+varying vec4 vTexCoord0;
+#define vs_oT0 vTexCoord0
+attribute vec4 vs_v1;
+varying vec4 vFrontSecondaryColor;
+#define vs_oD1 vFrontSecondaryColor
+attribute vec4 vs_v2;
+
+void main()
+{
+	vs_r0.x = dot(vs_v1.xyz, vs_c23.xyz);
+	vs_r0.y = dot(vs_v1.xyz, vs_c24.xyz);
+	vs_r0.z = dot(vs_v1.xyz, vs_c25.xyz);
+	vs_r1.xyz = normalize(vs_r0.xyz);
+	vs_r0.x = dot(-vs_c4.xyz, vs_r1.xyz);
+	vs_r0.y = float(vs_r0.x >= vs_c7.x);
+	vs_r0.x = vs_r0.x * vs_r0.y;
+	vs_r0.xzw = vs_r0.xxx * vs_c5.xyz;
+	vs_r2.xyz = vs_c0.xyz;
+	vs_oD0.xyz = (vs_r0.xzw * vs_r2.xyz) + vs_c1.xyz;
+	vs_r2.x = dot(vs_v0, vs_c19);
+	vs_r2.y = dot(vs_v0, vs_c20);
+	vs_r2.z = dot(vs_v0, vs_c21);
+	vs_r0.xzw = -vs_r2.xyz + vs_c13.xyz;
+	vs_r2.xyz = normalize(vs_r0.xzw);
+	vs_r0.xzw = vs_r2.xyz + -vs_c4.xyz;
+	vs_r2.xyz = normalize(vs_r0.xzw);
+	vs_r0.x = dot(vs_r2.xyz, vs_r1.xyz);
+	vs_r0.x = max(vs_r0.x, vs_c7.x);
+	vs_r0.x = vs_r0.y * vs_r0.x;
+	vs_r1.x = pow(abs(vs_r0.x), vs_c3.x);
+	vs_r0.xyz = vs_r1.xxx * vs_c6.xyz;
+	vs_oD1.xyz = vs_r0.xyz * vs_c2.xyz;
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c7.x);
+	vs_oD1.w = min(vs_r0.x, vs_c7.y);
+	vs_oD0.w = vs_c0.w;
+	vs_oT0.xy = vs_v2.xy;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[4])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=Normal; index=0)
+#monogame Attribute(name=vs_v2; usage=TextureCoordinate; index=0)
+#monogame Attribute(name=vs_v3; usage=Color; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[19];
+const vec4 vs_c7 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+vec4 vs_r1;
+vec4 vs_r2;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c1 vs_uniforms_vec4[1]
+#define vs_c2 vs_uniforms_vec4[2]
+#define vs_c3 vs_uniforms_vec4[3]
+#define vs_c4 vs_uniforms_vec4[4]
+#define vs_c5 vs_uniforms_vec4[5]
+#define vs_c6 vs_uniforms_vec4[6]
+#define vs_c13 vs_uniforms_vec4[7]
+#define vs_c14 vs_uniforms_vec4[8]
+#define vs_c15 vs_uniforms_vec4[9]
+#define vs_c16 vs_uniforms_vec4[10]
+#define vs_c17 vs_uniforms_vec4[11]
+#define vs_c18 vs_uniforms_vec4[12]
+#define vs_c19 vs_uniforms_vec4[13]
+#define vs_c20 vs_uniforms_vec4[14]
+#define vs_c21 vs_uniforms_vec4[15]
+#define vs_c23 vs_uniforms_vec4[16]
+#define vs_c24 vs_uniforms_vec4[17]
+#define vs_c25 vs_uniforms_vec4[18]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+varying vec4 vTexCoord0;
+#define vs_oT0 vTexCoord0
+attribute vec4 vs_v1;
+varying vec4 vFrontSecondaryColor;
+#define vs_oD1 vFrontSecondaryColor
+attribute vec4 vs_v2;
+attribute vec4 vs_v3;
+
+void main()
+{
+	vs_r0.x = dot(vs_v0, vs_c19);
+	vs_r0.y = dot(vs_v0, vs_c20);
+	vs_r0.z = dot(vs_v0, vs_c21);
+	vs_r0.xyz = -vs_r0.xyz + vs_c13.xyz;
+	vs_r1.xyz = normalize(vs_r0.xyz);
+	vs_r0.xyz = vs_r1.xyz + -vs_c4.xyz;
+	vs_r1.xyz = normalize(vs_r0.xyz);
+	vs_r0.x = dot(vs_v1.xyz, vs_c23.xyz);
+	vs_r0.y = dot(vs_v1.xyz, vs_c24.xyz);
+	vs_r0.z = dot(vs_v1.xyz, vs_c25.xyz);
+	vs_r2.xyz = normalize(vs_r0.xyz);
+	vs_r0.x = dot(vs_r1.xyz, vs_r2.xyz);
+	vs_r0.y = dot(-vs_c4.xyz, vs_r2.xyz);
+	vs_r0.x = max(vs_r0.x, vs_c7.x);
+	vs_r0.z = float(vs_r0.y >= vs_c7.x);
+	vs_r0.xy = vs_r0.zy * vs_r0.xz;
+	vs_r1.x = pow(abs(vs_r0.x), vs_c3.x);
+	vs_r0.xzw = vs_r1.xxx * vs_c6.xyz;
+	vs_oD1.xyz = vs_r0.xzw * vs_c2.xyz;
+	vs_r0.xyz = vs_r0.yyy * vs_c5.xyz;
+	vs_r1.xyz = vs_c0.xyz;
+	vs_r0.xyz = (vs_r0.xyz * vs_r1.xyz) + vs_c1.xyz;
+	vs_oD0.xyz = vs_r0.xyz * vs_v3.xyz;
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c7.x);
+	vs_oD1.w = min(vs_r0.x, vs_c7.y);
+	vs_oD0.w = vs_v3.w * vs_c0.w;
+	vs_oT0.xy = vs_v2.xy;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=pixel; constantBuffers=[5])
+
+#ifdef GL_ES
+precision mediump float;
+precision mediump int;
+#endif
+
+uniform vec4 ps_uniforms_vec4[15];
+const vec4 ps_c15 = vec4(1.0, 0.0, 0.0, 0.0);
+vec4 ps_r0;
+vec4 ps_r1;
+vec4 ps_r2;
+vec4 ps_r3;
+vec4 ps_r4;
+vec4 ps_r5;
+vec4 ps_r6;
+#define ps_c0 ps_uniforms_vec4[0]
+#define ps_c1 ps_uniforms_vec4[1]
+#define ps_c2 ps_uniforms_vec4[2]
+#define ps_c3 ps_uniforms_vec4[3]
+#define ps_c4 ps_uniforms_vec4[4]
+#define ps_c5 ps_uniforms_vec4[5]
+#define ps_c6 ps_uniforms_vec4[6]
+#define ps_c7 ps_uniforms_vec4[7]
+#define ps_c8 ps_uniforms_vec4[8]
+#define ps_c9 ps_uniforms_vec4[9]
+#define ps_c10 ps_uniforms_vec4[10]
+#define ps_c11 ps_uniforms_vec4[11]
+#define ps_c12 ps_uniforms_vec4[12]
+#define ps_c13 ps_uniforms_vec4[13]
+#define ps_c14 ps_uniforms_vec4[14]
+varying vec4 vFrontColor;
+#define ps_v0 vFrontColor
+varying vec4 vTexCoord0;
+#define ps_t0 vTexCoord0
+#define ps_oC0 gl_FragColor
+varying vec4 vTexCoord1;
+#define ps_t1 vTexCoord1
+
+void main()
+{
+	ps_r0.xyz = normalize(ps_t1.xyz);
+	ps_r1.x = dot(-ps_c5.xyz, ps_r0.xyz);
+	ps_r1.y = dot(-ps_c8.xyz, ps_r0.xyz);
+	ps_r1.z = dot(-ps_c11.xyz, ps_r0.xyz);
+	ps_r2.x = ((ps_r1.x >= 0.0) ? ps_c15.x : ps_c15.y);
+	ps_r2.y = ((ps_r1.y >= 0.0) ? ps_c15.x : ps_c15.y);
+	ps_r2.z = ((ps_r1.z >= 0.0) ? ps_c15.x : ps_c15.y);
+	ps_r1.xyz = ps_r1.xyz * ps_r2.xyz;
+	ps_r3.xyz = -ps_t0.xyz + ps_c14.xyz;
+	ps_r0.w = dot(ps_r3.xyz, ps_r3.xyz);
+	ps_r0.w = inversesqrt(ps_r0.w);
+	ps_r4.xyz = (ps_r3.xyz * ps_r0.www) + -ps_c5.xyz;
+	ps_r5.xyz = normalize(ps_r4.xyz);
+	ps_r4.x = dot(ps_r5.xyz, ps_r0.xyz);
+	ps_r5.xyz = (ps_r3.xyz * ps_r0.www) + -ps_c8.xyz;
+	ps_r3.xyz = (ps_r3.xyz * ps_r0.www) + -ps_c11.xyz;
+	ps_r6.xyz = normalize(ps_r3.xyz);
+	ps_r4.z = dot(ps_r6.xyz, ps_r0.xyz);
+	ps_r3.xyz = normalize(ps_r5.xyz);
+	ps_r4.y = dot(ps_r3.xyz, ps_r0.xyz);
+	ps_r0.xyz = ps_r2.xyz * ps_r4.xyz;
+	ps_r0.x = ((ps_r4.x >= 0.0) ? ps_r0.x : ps_c15.y);
+	ps_r0.y = ((ps_r4.y >= 0.0) ? ps_r0.y : ps_c15.y);
+	ps_r0.z = ((ps_r4.z >= 0.0) ? ps_r0.z : ps_c15.y);
+	ps_r2.x = log2(ps_r0.x);
+	ps_r2.y = log2(ps_r0.y);
+	ps_r2.z = log2(ps_r0.z);
+	ps_r0.xyz = ps_r2.xyz * ps_c4.xxx;
+	ps_r1.w = exp2(ps_r0.y);
+	ps_r2.xyz = ps_r1.www * ps_c10.xyz;
+	ps_r1.w = exp2(ps_r0.x);
+	ps_r2.w = exp2(ps_r0.z);
+	ps_r0.xyz = (ps_r1.www * ps_c7.xyz) + ps_r2.xyz;
+	ps_r0.xyz = (ps_r2.www * ps_c13.xyz) + ps_r0.xyz;
+	ps_r0.xyz = ps_r0.xyz * ps_c3.xyz;
+	ps_r0.xyz = ps_r0.xyz * ps_v0.www;
+	ps_r2.xyz = ps_r1.yyy * ps_c9.xyz;
+	ps_r2.xyz = (ps_r1.xxx * ps_c6.xyz) + ps_r2.xyz;
+	ps_r1.xyz = (ps_r1.zzz * ps_c12.xyz) + ps_r2.xyz;
+	ps_r2.xyz = ps_c1.xyz;
+	ps_r1.xyz = (ps_r1.xyz * ps_r2.xyz) + ps_c2.xyz;
+	ps_r0.xyz = (ps_v0.xyz * ps_r1.xyz) + ps_r0.xyz;
+	ps_r1.xyz = (ps_c0.xyz * ps_v0.www) + -ps_r0.xyz;
+	ps_r0.xyz = (ps_t0.www * ps_r1.xyz) + ps_r0.xyz;
+	ps_r0.w = ps_v0.w;
+	ps_oC0 = ps_r0;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[6])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=Normal; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[12];
+const vec4 vs_c1 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c14 vs_uniforms_vec4[1]
+#define vs_c15 vs_uniforms_vec4[2]
+#define vs_c16 vs_uniforms_vec4[3]
+#define vs_c17 vs_uniforms_vec4[4]
+#define vs_c18 vs_uniforms_vec4[5]
+#define vs_c19 vs_uniforms_vec4[6]
+#define vs_c20 vs_uniforms_vec4[7]
+#define vs_c21 vs_uniforms_vec4[8]
+#define vs_c23 vs_uniforms_vec4[9]
+#define vs_c24 vs_uniforms_vec4[10]
+#define vs_c25 vs_uniforms_vec4[11]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+varying vec4 vTexCoord0;
+#define vs_oT0 vTexCoord0
+attribute vec4 vs_v1;
+varying vec4 vTexCoord1;
+#define vs_oT1 vTexCoord1
+
+void main()
+{
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_oT0.x = dot(vs_v0, vs_c19);
+	vs_oT0.y = dot(vs_v0, vs_c20);
+	vs_oT0.z = dot(vs_v0, vs_c21);
+	vs_r0.x = dot(vs_v1.xyz, vs_c23.xyz);
+	vs_r0.y = dot(vs_v1.xyz, vs_c24.xyz);
+	vs_r0.z = dot(vs_v1.xyz, vs_c25.xyz);
+	vs_r0.w = dot(vs_r0.xyz, vs_r0.xyz);
+	vs_r0.w = inversesqrt(vs_r0.w);
+	vs_oT1.xyz = vs_r0.www * vs_r0.xyz;
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c1.x);
+	vs_oT0.w = min(vs_r0.x, vs_c1.y);
+	vs_r0.xy = vs_c1.xy;
+	vs_oD0 = (vs_c0.wwww * vs_r0.xxxy) + vs_r0.yyyx;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[6])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=Normal; index=0)
+#monogame Attribute(name=vs_v2; usage=Color; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[12];
+const vec4 vs_c1 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c14 vs_uniforms_vec4[1]
+#define vs_c15 vs_uniforms_vec4[2]
+#define vs_c16 vs_uniforms_vec4[3]
+#define vs_c17 vs_uniforms_vec4[4]
+#define vs_c18 vs_uniforms_vec4[5]
+#define vs_c19 vs_uniforms_vec4[6]
+#define vs_c20 vs_uniforms_vec4[7]
+#define vs_c21 vs_uniforms_vec4[8]
+#define vs_c23 vs_uniforms_vec4[9]
+#define vs_c24 vs_uniforms_vec4[10]
+#define vs_c25 vs_uniforms_vec4[11]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+varying vec4 vTexCoord0;
+#define vs_oT0 vTexCoord0
+attribute vec4 vs_v1;
+varying vec4 vTexCoord1;
+#define vs_oT1 vTexCoord1
+attribute vec4 vs_v2;
+
+void main()
+{
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_oT0.x = dot(vs_v0, vs_c19);
+	vs_oT0.y = dot(vs_v0, vs_c20);
+	vs_oT0.z = dot(vs_v0, vs_c21);
+	vs_r0.x = dot(vs_v1.xyz, vs_c23.xyz);
+	vs_r0.y = dot(vs_v1.xyz, vs_c24.xyz);
+	vs_r0.z = dot(vs_v1.xyz, vs_c25.xyz);
+	vs_r0.w = dot(vs_r0.xyz, vs_r0.xyz);
+	vs_r0.w = inversesqrt(vs_r0.w);
+	vs_oT1.xyz = vs_r0.www * vs_r0.xyz;
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c1.x);
+	vs_oT0.w = min(vs_r0.x, vs_c1.y);
+	vs_oD0.w = vs_v2.w * vs_c0.w;
+	vs_oD0.xyz = vs_v2.xyz;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=pixel; constantBuffers=[5])
+#monogame Sampler(name=ps_s0; type=Sampler2D; textureSlot=0; samplerSlot=0; parameter=19)
+
+#ifdef GL_ES
+precision mediump float;
+precision mediump int;
+#endif
+
+uniform vec4 ps_uniforms_vec4[15];
+const vec4 ps_c15 = vec4(1.0, 0.0, 0.0, 0.0);
+vec4 ps_r0;
+vec4 ps_r1;
+vec4 ps_r2;
+vec4 ps_r3;
+vec4 ps_r4;
+vec4 ps_r5;
+vec4 ps_r6;
+vec4 ps_r7;
+#define ps_c0 ps_uniforms_vec4[0]
+#define ps_c1 ps_uniforms_vec4[1]
+#define ps_c2 ps_uniforms_vec4[2]
+#define ps_c3 ps_uniforms_vec4[3]
+#define ps_c4 ps_uniforms_vec4[4]
+#define ps_c5 ps_uniforms_vec4[5]
+#define ps_c6 ps_uniforms_vec4[6]
+#define ps_c7 ps_uniforms_vec4[7]
+#define ps_c8 ps_uniforms_vec4[8]
+#define ps_c9 ps_uniforms_vec4[9]
+#define ps_c10 ps_uniforms_vec4[10]
+#define ps_c11 ps_uniforms_vec4[11]
+#define ps_c12 ps_uniforms_vec4[12]
+#define ps_c13 ps_uniforms_vec4[13]
+#define ps_c14 ps_uniforms_vec4[14]
+uniform sampler2D ps_s0;
+varying vec4 vFrontColor;
+#define ps_v0 vFrontColor
+varying vec4 vTexCoord0;
+#define ps_t0 vTexCoord0
+#define ps_oC0 gl_FragColor
+varying vec4 vTexCoord1;
+#define ps_t1 vTexCoord1
+varying vec4 vTexCoord2;
+#define ps_t2 vTexCoord2
+
+void main()
+{
+	ps_r0 = texture2D(ps_s0, ps_t0.xy);
+	ps_r1.xyz = normalize(ps_t2.xyz);
+	ps_r2.x = dot(-ps_c5.xyz, ps_r1.xyz);
+	ps_r2.y = dot(-ps_c8.xyz, ps_r1.xyz);
+	ps_r2.z = dot(-ps_c11.xyz, ps_r1.xyz);
+	ps_r3.x = ((ps_r2.x >= 0.0) ? ps_c15.x : ps_c15.y);
+	ps_r3.y = ((ps_r2.y >= 0.0) ? ps_c15.x : ps_c15.y);
+	ps_r3.z = ((ps_r2.z >= 0.0) ? ps_c15.x : ps_c15.y);
+	ps_r2.xyz = ps_r2.xyz * ps_r3.xyz;
+	ps_r4.xyz = -ps_t1.xyz + ps_c14.xyz;
+	ps_r1.w = dot(ps_r4.xyz, ps_r4.xyz);
+	ps_r1.w = inversesqrt(ps_r1.w);
+	ps_r5.xyz = (ps_r4.xyz * ps_r1.www) + -ps_c5.xyz;
+	ps_r6.xyz = normalize(ps_r5.xyz);
+	ps_r5.x = dot(ps_r6.xyz, ps_r1.xyz);
+	ps_r6.xyz = (ps_r4.xyz * ps_r1.www) + -ps_c8.xyz;
+	ps_r4.xyz = (ps_r4.xyz * ps_r1.www) + -ps_c11.xyz;
+	ps_r7.xyz = normalize(ps_r4.xyz);
+	ps_r5.z = dot(ps_r7.xyz, ps_r1.xyz);
+	ps_r4.xyz = normalize(ps_r6.xyz);
+	ps_r5.y = dot(ps_r4.xyz, ps_r1.xyz);
+	ps_r1.xyz = ps_r3.xyz * ps_r5.xyz;
+	ps_r1.x = ((ps_r5.x >= 0.0) ? ps_r1.x : ps_c15.y);
+	ps_r1.y = ((ps_r5.y >= 0.0) ? ps_r1.y : ps_c15.y);
+	ps_r1.z = ((ps_r5.z >= 0.0) ? ps_r1.z : ps_c15.y);
+	ps_r3.x = log2(ps_r1.x);
+	ps_r3.y = log2(ps_r1.y);
+	ps_r3.z = log2(ps_r1.z);
+	ps_r1.xyz = ps_r3.xyz * ps_c4.xxx;
+	ps_r2.w = exp2(ps_r1.y);
+	ps_r3.xyz = ps_r2.www * ps_c10.xyz;
+	ps_r2.w = exp2(ps_r1.x);
+	ps_r3.w = exp2(ps_r1.z);
+	ps_r1.xyz = (ps_r2.www * ps_c7.xyz) + ps_r3.xyz;
+	ps_r1.xyz = (ps_r3.www * ps_c13.xyz) + ps_r1.xyz;
+	ps_r1.xyz = ps_r1.xyz * ps_c3.xyz;
+	ps_r0 = ps_r0 * ps_v0;
+	ps_r1.xyz = ps_r0.www * ps_r1.xyz;
+	ps_r3.xyz = ps_r2.yyy * ps_c9.xyz;
+	ps_r3.xyz = (ps_r2.xxx * ps_c6.xyz) + ps_r3.xyz;
+	ps_r2.xyz = (ps_r2.zzz * ps_c12.xyz) + ps_r3.xyz;
+	ps_r3.xyz = ps_c1.xyz;
+	ps_r2.xyz = (ps_r2.xyz * ps_r3.xyz) + ps_c2.xyz;
+	ps_r1.xyz = (ps_r0.xyz * ps_r2.xyz) + ps_r1.xyz;
+	ps_r2.xyz = (ps_c0.xyz * ps_r0.www) + -ps_r1.xyz;
+	ps_r0.xyz = (ps_t1.www * ps_r2.xyz) + ps_r1.xyz;
+	ps_oC0 = ps_r0;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[6])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=Normal; index=0)
+#monogame Attribute(name=vs_v2; usage=TextureCoordinate; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[12];
+const vec4 vs_c1 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c14 vs_uniforms_vec4[1]
+#define vs_c15 vs_uniforms_vec4[2]
+#define vs_c16 vs_uniforms_vec4[3]
+#define vs_c17 vs_uniforms_vec4[4]
+#define vs_c18 vs_uniforms_vec4[5]
+#define vs_c19 vs_uniforms_vec4[6]
+#define vs_c20 vs_uniforms_vec4[7]
+#define vs_c21 vs_uniforms_vec4[8]
+#define vs_c23 vs_uniforms_vec4[9]
+#define vs_c24 vs_uniforms_vec4[10]
+#define vs_c25 vs_uniforms_vec4[11]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+varying vec4 vTexCoord0;
+#define vs_oT0 vTexCoord0
+attribute vec4 vs_v1;
+varying vec4 vTexCoord1;
+#define vs_oT1 vTexCoord1
+attribute vec4 vs_v2;
+varying vec4 vTexCoord2;
+#define vs_oT2 vTexCoord2
+
+void main()
+{
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_oT1.x = dot(vs_v0, vs_c19);
+	vs_oT1.y = dot(vs_v0, vs_c20);
+	vs_oT1.z = dot(vs_v0, vs_c21);
+	vs_r0.x = dot(vs_v1.xyz, vs_c23.xyz);
+	vs_r0.y = dot(vs_v1.xyz, vs_c24.xyz);
+	vs_r0.z = dot(vs_v1.xyz, vs_c25.xyz);
+	vs_r0.w = dot(vs_r0.xyz, vs_r0.xyz);
+	vs_r0.w = inversesqrt(vs_r0.w);
+	vs_oT2.xyz = vs_r0.www * vs_r0.xyz;
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c1.x);
+	vs_oT1.w = min(vs_r0.x, vs_c1.y);
+	vs_oT0.xy = vs_v2.xy;
+	vs_r0.xy = vs_c1.xy;
+	vs_oD0 = (vs_c0.wwww * vs_r0.xxxy) + vs_r0.yyyx;
+}
+
+
+#monogame EndShader()
+
+#monogame BeginShader(stage=vertex; constantBuffers=[6])
+#monogame Attribute(name=vs_v0; usage=Position; index=0)
+#monogame Attribute(name=vs_v1; usage=Normal; index=0)
+#monogame Attribute(name=vs_v2; usage=TextureCoordinate; index=0)
+#monogame Attribute(name=vs_v3; usage=Color; index=0)
+
+#ifdef GL_ES
+precision highp float;
+precision mediump int;
+#endif
+
+uniform vec4 vs_uniforms_vec4[12];
+const vec4 vs_c1 = vec4(0.0, 1.0, 0.0, 0.0);
+vec4 vs_r0;
+#define vs_c0 vs_uniforms_vec4[0]
+#define vs_c14 vs_uniforms_vec4[1]
+#define vs_c15 vs_uniforms_vec4[2]
+#define vs_c16 vs_uniforms_vec4[3]
+#define vs_c17 vs_uniforms_vec4[4]
+#define vs_c18 vs_uniforms_vec4[5]
+#define vs_c19 vs_uniforms_vec4[6]
+#define vs_c20 vs_uniforms_vec4[7]
+#define vs_c21 vs_uniforms_vec4[8]
+#define vs_c23 vs_uniforms_vec4[9]
+#define vs_c24 vs_uniforms_vec4[10]
+#define vs_c25 vs_uniforms_vec4[11]
+attribute vec4 vs_v0;
+#define vs_oPos gl_Position
+varying vec4 vFrontColor;
+#define vs_oD0 vFrontColor
+varying vec4 vTexCoord0;
+#define vs_oT0 vTexCoord0
+attribute vec4 vs_v1;
+varying vec4 vTexCoord1;
+#define vs_oT1 vTexCoord1
+attribute vec4 vs_v2;
+varying vec4 vTexCoord2;
+#define vs_oT2 vTexCoord2
+attribute vec4 vs_v3;
+
+void main()
+{
+	vs_oPos.x = dot(vs_v0, vs_c15);
+	vs_oPos.y = dot(vs_v0, vs_c16);
+	vs_oPos.z = dot(vs_v0, vs_c17);
+	vs_oPos.w = dot(vs_v0, vs_c18);
+	vs_oT1.x = dot(vs_v0, vs_c19);
+	vs_oT1.y = dot(vs_v0, vs_c20);
+	vs_oT1.z = dot(vs_v0, vs_c21);
+	vs_r0.x = dot(vs_v1.xyz, vs_c23.xyz);
+	vs_r0.y = dot(vs_v1.xyz, vs_c24.xyz);
+	vs_r0.z = dot(vs_v1.xyz, vs_c25.xyz);
+	vs_r0.w = dot(vs_r0.xyz, vs_r0.xyz);
+	vs_r0.w = inversesqrt(vs_r0.w);
+	vs_oT2.xyz = vs_r0.www * vs_r0.xyz;
+	vs_r0.x = dot(vs_v0, vs_c14);
+	vs_r0.x = max(vs_r0.x, vs_c1.x);
+	vs_oT1.w = min(vs_r0.x, vs_c1.y);
+	vs_oD0.w = vs_v3.w * vs_c0.w;
+	vs_oT0.xy = vs_v2.xy;
+	vs_oD0.xyz = vs_v3.xyz;
+}
+
+
+#monogame EndShader()
+
+#monogame EffectParameter(name=FogColor; class=Vector; type=Single; semantic=; rows=1; columns=3; elements=[]; structMembers=[])
+#monogame EffectParameter(name=DiffuseColor; class=Vector; type=Single; semantic=; rows=1; columns=4; elements=[]; structMembers=[])
+#monogame EffectParameter(name=FogVector; class=Vector; type=Single; semantic=; rows=1; columns=4; elements=[]; structMembers=[])
+#monogame EffectParameter(name=WorldViewProj; class=Matrix; type=Single; semantic=; rows=4; columns=4; elements=[]; structMembers=[])
+#monogame EffectParameter(name=EmissiveColor; class=Vector; type=Single; semantic=; rows=1; columns=3; elements=[]; structMembers=[])
+#monogame EffectParameter(name=SpecularColor; class=Vector; type=Single; semantic=; rows=1; columns=3; elements=[]; structMembers=[])
+#monogame EffectParameter(name=SpecularPower; class=Scalar; type=Single; semantic=; rows=1; columns=1; elements=[]; structMembers=[])
+#monogame EffectParameter(name=DirLight0Direction; class=Vector; type=Single; semantic=; rows=1; columns=3; elements=[]; structMembers=[])
+#monogame EffectParameter(name=DirLight0DiffuseColor; class=Vector; type=Single; semantic=; rows=1; columns=3; elements=[]; structMembers=[])
+#monogame EffectParameter(name=DirLight0SpecularColor; class=Vector; type=Single; semantic=; rows=1; columns=3; elements=[]; structMembers=[])
+#monogame EffectParameter(name=DirLight1Direction; class=Vector; type=Single; semantic=; rows=1; columns=3; elements=[]; structMembers=[])
+#monogame EffectParameter(name=DirLight1DiffuseColor; class=Vector; type=Single; semantic=; rows=1; columns=3; elements=[]; structMembers=[])
+#monogame EffectParameter(name=DirLight1SpecularColor; class=Vector; type=Single; semantic=; rows=1; columns=3; elements=[]; structMembers=[])
+#monogame EffectParameter(name=DirLight2Direction; class=Vector; type=Single; semantic=; rows=1; columns=3; elements=[]; structMembers=[])
+#monogame EffectParameter(name=DirLight2DiffuseColor; class=Vector; type=Single; semantic=; rows=1; columns=3; elements=[]; structMembers=[])
+#monogame EffectParameter(name=DirLight2SpecularColor; class=Vector; type=Single; semantic=; rows=1; columns=3; elements=[]; structMembers=[])
+#monogame EffectParameter(name=EyePosition; class=Vector; type=Single; semantic=; rows=1; columns=3; elements=[]; structMembers=[])
+#monogame EffectParameter(name=World; class=Matrix; type=Single; semantic=; rows=4; columns=4; elements=[]; structMembers=[])
+#monogame EffectParameter(name=WorldInverseTranspose; class=Matrix; type=Single; semantic=; rows=3; columns=3; elements=[]; structMembers=[])
+#monogame EffectParameter(name=Texture; class=Object; type=Texture2D; semantic=; rows=0; columns=0; elements=[]; structMembers=[])
+#monogame EffectPass(name=; vertexShader=1; pixelShader=0)
+#monogame EffectTechnique(name=BasicEffect)
+#monogame EffectPass(name=; vertexShader=3; pixelShader=2)
+#monogame EffectTechnique(name=BasicEffect_NoFog)
+#monogame EffectPass(name=; vertexShader=4; pixelShader=0)
+#monogame EffectTechnique(name=BasicEffect_VertexColor)
+#monogame EffectPass(name=; vertexShader=5; pixelShader=2)
+#monogame EffectTechnique(name=BasicEffect_VertexColor_NoFog)
+#monogame EffectPass(name=; vertexShader=7; pixelShader=6)
+#monogame EffectTechnique(name=BasicEffect_Texture)
+#monogame EffectPass(name=; vertexShader=9; pixelShader=8)
+#monogame EffectTechnique(name=BasicEffect_Texture_NoFog)
+#monogame EffectPass(name=; vertexShader=10; pixelShader=6)
+#monogame EffectTechnique(name=BasicEffect_Texture_VertexColor)
+#monogame EffectPass(name=; vertexShader=11; pixelShader=8)
+#monogame EffectTechnique(name=BasicEffect_Texture_VertexColor_NoFog)
+#monogame EffectPass(name=; vertexShader=13; pixelShader=12)
+#monogame EffectTechnique(name=BasicEffect_VertexLighting)
+#monogame EffectPass(name=; vertexShader=13; pixelShader=14)
+#monogame EffectTechnique(name=BasicEffect_VertexLighting_NoFog)
+#monogame EffectPass(name=; vertexShader=15; pixelShader=12)
+#monogame EffectTechnique(name=BasicEffect_VertexLighting_VertexColor)
+#monogame EffectPass(name=; vertexShader=15; pixelShader=14)
+#monogame EffectTechnique(name=BasicEffect_VertexLighting_VertexColor_NoFog)
+#monogame EffectPass(name=; vertexShader=17; pixelShader=16)
+#monogame EffectTechnique(name=BasicEffect_VertexLighting_Texture)
+#monogame EffectPass(name=; vertexShader=17; pixelShader=18)
+#monogame EffectTechnique(name=BasicEffect_VertexLighting_Texture_NoFog)
+#monogame EffectPass(name=; vertexShader=19; pixelShader=16)
+#monogame EffectTechnique(name=BasicEffect_VertexLighting_Texture_VertexColor)
+#monogame EffectPass(name=; vertexShader=19; pixelShader=18)
+#monogame EffectTechnique(name=BasicEffect_VertexLighting_Texture_VertexColor_NoFog)
+#monogame EffectPass(name=; vertexShader=20; pixelShader=12)
+#monogame EffectTechnique(name=BasicEffect_OneLight)
+#monogame EffectPass(name=; vertexShader=20; pixelShader=14)
+#monogame EffectTechnique(name=BasicEffect_OneLight_NoFog)
+#monogame EffectPass(name=; vertexShader=21; pixelShader=12)
+#monogame EffectTechnique(name=BasicEffect_OneLight_VertexColor)
+#monogame EffectPass(name=; vertexShader=21; pixelShader=14)
+#monogame EffectTechnique(name=BasicEffect_OneLight_VertexColor_NoFog)
+#monogame EffectPass(name=; vertexShader=22; pixelShader=16)
+#monogame EffectTechnique(name=BasicEffect_OneLight_Texture)
+#monogame EffectPass(name=; vertexShader=22; pixelShader=18)
+#monogame EffectTechnique(name=BasicEffect_OneLight_Texture_NoFog)
+#monogame EffectPass(name=; vertexShader=23; pixelShader=16)
+#monogame EffectTechnique(name=BasicEffect_OneLight_Texture_VertexColor)
+#monogame EffectPass(name=; vertexShader=23; pixelShader=18)
+#monogame EffectTechnique(name=BasicEffect_OneLight_Texture_VertexColor_NoFog)
+#monogame EffectPass(name=; vertexShader=25; pixelShader=24)
+#monogame EffectTechnique(name=BasicEffect_PixelLighting)
+#monogame EffectPass(name=; vertexShader=25; pixelShader=24)
+#monogame EffectTechnique(name=BasicEffect_PixelLighting_NoFog)
+#monogame EffectPass(name=; vertexShader=26; pixelShader=24)
+#monogame EffectTechnique(name=BasicEffect_PixelLighting_VertexColor)
+#monogame EffectPass(name=; vertexShader=26; pixelShader=24)
+#monogame EffectTechnique(name=BasicEffect_PixelLighting_VertexColor_NoFog)
+#monogame EffectPass(name=; vertexShader=28; pixelShader=27)
+#monogame EffectTechnique(name=BasicEffect_PixelLighting_Texture)
+#monogame EffectPass(name=; vertexShader=28; pixelShader=27)
+#monogame EffectTechnique(name=BasicEffect_PixelLighting_Texture_NoFog)
+#monogame EffectPass(name=; vertexShader=29; pixelShader=27)
+#monogame EffectTechnique(name=BasicEffect_PixelLighting_Texture_VertexColor)
+#monogame EffectPass(name=; vertexShader=29; pixelShader=27)
+#monogame EffectTechnique(name=BasicEffect_PixelLighting_Texture_VertexColor_NoFog)

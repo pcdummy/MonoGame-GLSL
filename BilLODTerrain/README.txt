@@ -1,0 +1,1 @@
+﻿See: http://msmvps.com/blogs/valentin/archive/2008/09/30/smart-terrain-rendering-with-xna.aspx
